@@ -6,6 +6,9 @@ def remap(df,remap_vars,remap_values):
     #rename and replace variables with known mapping
     pass
 
+def pivot(df,pivot):
+    pass
+
 def add_logic(logic):
     pass
 
@@ -21,4 +24,3 @@ if __name__ == "__main__":
     log_setup(logpath=logpath)
     logging.info("test")
     # excelfile = pd.read_excel(excelpath,skiprows=excelskiprows)
-

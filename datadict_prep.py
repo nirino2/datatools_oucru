@@ -57,7 +57,7 @@ def fetch_raw_latest(projectname,direc=None,selection="recent",selectdayslimit=3
 
 
 if __name__ == "__main__":
-    pname = "INVITE OUCRU"
+    pname = "MetLep"
     ct = datetime.datetime.now().strftime("%d%b%Y_%H%M%S")
     dataformat = "eav"
     fname = f"{pname}_{dataformat}_{ct}"
