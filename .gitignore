@@ -1,5 +1,6 @@
 __pycache__/
 /test/
 /utils/config.py
+/.vscode/
 *.ipynb
 misc.py
