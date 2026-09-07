@@ -1,5 +1,5 @@
 __pycache__/
 /test/
 /utils/config.py
-transform.ipynb
+*.ipynb
 misc.py
