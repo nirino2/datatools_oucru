@@ -21,7 +21,7 @@ def fetch_redcap_all_projectinfo(prjtdb,data_format='eav',rawOrLabel='raw'):
     #    'text_validation_type_or_show_slider_number', 'text_validation_min',
     #    'text_validation_max', 'identifier', 'branching_logic',
     #    'required_field', 'custom_alignment', 'question_number',
-    #    'matrix_group_name', 'matrix_ranking', 'field_annotation']
+    #    'matrix_group_name', 'matrix_ranking', 'field_annotation'] 
             dictall["metadata"] = df_vars
         else:
             raise Exception(f"API Error: Status code {response.status_code}" )
@@ -55,7 +55,16 @@ def fetch_redcap_all_projectinfo(prjtdb,data_format='eav',rawOrLabel='raw'):
             if info_project.has_repeating_instruments_or_events == 1:
                 df_forminevent = pd.DataFrame(json.loads(redcap_apimodules.e_formEventMapping(prjtdb.apilink,prjtdb.apikey).text))  
                 dictall['forminevent'] = df_forminevent 
-        dictall['data'] = pd.DataFrame(json.loads(redcap_apimodules.e_data(prjtdb.apilink,prjtdb.apikey,dlformat=data_format,rawOrLabel=rawOrLabel).text))
+        data_all = pd.DataFrame()
+        # print(dictall['dag'])
+
+        # BLOODY REDCAP CHANGED THE DATA OUTPUT BEHAVIOUR YET AGAIN
+        # for dag_sw in list(dictall['dag']['unique_group_name']):
+        # res = redcap_apimodules.e_dag_sw(prjtdb.apilink,prjtdb.apikey,dag_sw)
+        data_part = pd.DataFrame(json.loads(redcap_apimodules.e_data(prjtdb.apilink,prjtdb.apikey,dlformat=data_format,rawOrLabel=rawOrLabel).text))
+        data_part['redcap_repeat_instance'] = pd.to_numeric(data_part['redcap_repeat_instance'], errors='coerce').astype('Int64')
+        data_all = pd.concat([data_all,data_part],axis=0,join="outer")
+        dictall['data'] = data_all
         # print(dictall['data'].head(10))
         return dictall
     else:

@@ -16,6 +16,8 @@ def reform_eav_split_visits(redcapdata):
     df.loc[~df["field_name"].isin(is_cboxes),"cbox"] = ""
     df.loc[df["field_name"].isin(is_cboxes),"value"] = "Yes"
 
+    misdatacode = redcapdata["info_project"]["missing_data_codes"]
+
     #Get Column order
     dc["choices"] = dc["select_choices_or_calculations"]
     dc.loc[dc["field_type"] != "checkbox","choices"] = ""
@@ -45,12 +47,13 @@ def reform_eav_split_visits(redcapdata):
     for name, grp in df.groupby("redcap_event_name"):
         print(name, grp.shape)
         for name2, grp2 in grp.groupby(["redcap_repeat_instrument","redcap_repeat_instance"],dropna=False):
-            if name2 == ("",""):
+            # print(name2)
+            if name2[0] == "" and pd.isna(name2[1]):
                 shtname = name
             else:
                 shtname = f"{name}_{name2[0]}_({name2[1]})"
                 print(name2, grp2.shape)
-            res[shtname] = grp2.drop(columns=["redcap_event_name"]).pivot("record",["field_name","Variable Description","cbox"],"value").sort_index()
+            res[shtname] = grp2.drop(columns=["redcap_event_name"]).pivot(index="record",columns=["field_name","Variable Description","cbox"],values="value").sort_index()
             # print(pd.MultiIndex.from_tuples(col_order))
             # pprint(pd.MultiIndex.from_tuples(col_order).intersection(res[shtname].columns).to_list())
             res[shtname] = res[shtname][pd.MultiIndex.from_tuples(col_order).intersection(res[shtname].columns)]

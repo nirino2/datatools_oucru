@@ -40,6 +40,26 @@ def projectname_decipher(projectname):
         details.prjcttype = "REDCap"
         details.apikey = config.api_key_oucru_ibis
         details.apilink = config.link_api_id
+    elif projectname == "INTERACT":
+        details.prjcttype = "REDCap"
+        details.apikey = config.api_key_oucru_interact
+        details.apilink = config.link_api_id
+    elif projectname == "Sumba":
+        details.prjcttype = "REDCap"
+        details.apikey = config.api_key_oucru_sumba
+        details.apilink = config.link_api_id
+    elif projectname == "IBIS2":
+        details.prjcttype = "REDCap"
+        details.apikey = config.api_key_oucru_ibis20
+        details.apilink = config.link_api_id
+    elif projectname == "INTERCEPT":
+        details.prjcttype = "REDCap"
+        details.apikey = config.api_key_oucru_intercept
+        details.apilink = config.link_api_id
+    elif projectname == "IMOVA":
+        details.prjcttype = "REDCap"
+        details.apikey = config.api_key_oucru_imova
+        details.apilink = config.link_api_id
     else:
         raise ValueError
     return details

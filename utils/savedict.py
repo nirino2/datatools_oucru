@@ -2,9 +2,9 @@ import pandas as pd
 
 def savetoexcel(dfs,saveto):
     with pd.ExcelWriter(saveto) as writer:
-        for df_name, df in dfs.items():
+        for idx, (df_name, df) in enumerate(dfs.items()):
             if isinstance(df,pd.DataFrame) or isinstance(df,pd.Series):
-                df.to_excel(writer, sheet_name=df_name[:31])
+                df.to_excel(writer, sheet_name=str(idx)+df_name[:29])
             elif isinstance(df,dict):
                 pd.DataFrame.from_dict(df).to_excel(writer, sheet_name=df_name[:31])
             elif isinstance(df,list) or isinstance(df,set):

@@ -55,19 +55,18 @@ def fetch_raw_latest(projectname,direc=None,selection="recent",selectdayslimit=3
     return
 
 
-
 if __name__ == "__main__":
-    pname = "MetLep"
+    pname = "INTERCEPT"
     ct = datetime.datetime.now().strftime("%d%b%Y_%H%M%S")
     dataformat = "eav"
     fname = f"{pname}_{dataformat}_{ct}"
     origdata, reformeddata, widedata = fetch_raw_data(pname,dataformat,with_reformat=True)
     
     if not os.path.exists(utils.fetch_path("test",fname)):
-        os.makedirs(utils.fetch_path("test",fname))
+        os.makedirs(utils.fetch_path("test",fname)) 
     utils.savetoexcel(origdata,utils.fetch_path("test",f"{fname}\\origdata.xlsx"))
     utils.savetoexcel(reformeddata,utils.fetch_path("test",f"{fname}\\visdata.xlsx"))
     utils.savetoexcel(widedata,utils.fetch_path("test",f"{fname}\\widedata.xlsx"))
     utils.savetopickle(origdata,utils.fetch_path("test",f"{fname}\\origdata.pkl"))
     utils.savetopickle(reformeddata,utils.fetch_path("test",f"{fname}\\visdata.pkl"))
-    utils.savetoexcel(widedata,utils.fetch_path("test",f"{fname}\\widedata.pkl"))
+    utils.savetopickle(widedata,utils.fetch_path("test",f"{fname}\\widedata.pkl"))

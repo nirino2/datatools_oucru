@@ -92,6 +92,16 @@ def e_dag(apilink,apikey):
     r = requests.post(apilink,data=fields)
     return r
 
+def e_dag_sw(apilink,apikey,dag_to_switch):
+    fields = {
+        'token': apikey,
+        'content': 'dag',
+        'action':'switch',
+        'dag':dag_to_switch
+    }
+    r = requests.post(apilink,data=fields)
+    return r
+
 def e_cdisc(apilink,apikey):
     fields = {
         'token': apikey,
