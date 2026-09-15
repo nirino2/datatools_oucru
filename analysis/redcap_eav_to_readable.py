@@ -2,9 +2,9 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from pandas.api.types import CategoricalDtype
 import numpy as np
-from datatools_oucru.analysis import eav_data_pull
+from analysis import eav_data_pull
 import pathlib
-from datatools_oucru.utils.savedict import savetoexcel as savetoexcel
+from utils.savedict import savetoexcel as savetoexcel
 from copy import deepcopy
 
 def reform_eav_split_visits(redcapdata):

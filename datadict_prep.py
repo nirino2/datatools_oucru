@@ -3,10 +3,10 @@ import pandas as pd
 import numpy as np
 import json
 from pathlib import Path
-import datatools_oucru.utils as utils
-from datatools_oucru import getfromredcap as frdcp
-from datatools_oucru.analysis.redcap_eav_to_readable import reform_eav_split_visits, reform_eav_to_wide
-from datatools_oucru.analysis.eav_data_pull import get_from_eav
+import utils as utils
+import getfromredcap as frdcp
+from analysis.redcap_eav_to_readable import reform_eav_split_visits, reform_eav_to_wide
+from analysis.eav_data_pull import get_from_eav
 import datetime
 import os
 import re
